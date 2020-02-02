@@ -12,8 +12,8 @@ const App = () => {
   const [disableClick, setDisableClick] = useState(false)
   const [matched, setMatched] = useState([])
   const [clickCount, setClickCount] = useState(0)
-  const [myBestScore, setMyBestScore] = useState(0)
-  const [globalScore, setGlobalScore] = useState(0)
+  const [myBestScore, setMyBestScore] = useState(null)
+  const [globalScore, setGlobalScore] = useState(null)
 
   const cardsType = ['1', '2', '3', '4', '5', '6']
 
@@ -91,19 +91,21 @@ const App = () => {
       <NewGame newGame={newGame}/>
       <MyBestScore myBestScore={myBestScore}/>
       <GlobalScore globalScore={globalScore}/>
-      {
-        cards.map((card) => (
-            <Card
-              key={card.id}
-              id={card.id}
-              text={card.type}
-              type={card.type}
-              handleClicked={handleClicked}
-              isRevealed={revealed.includes(card.id)}
-              isMatched={matched.includes(card.id)}
-              disableClick={disableClick || revealed.includes(card.id) || matched.includes(card.id)}/>
-        ))
-      }
+      <div className='card-container'>
+        {
+          cards.map((card) => (
+              <Card
+                key={card.id}
+                id={card.id}
+                text={card.type}
+                type={card.type}
+                handleClicked={handleClicked}
+                isRevealed={revealed.includes(card.id)}
+                isMatched={matched.includes(card.id)}
+                disableClick={disableClick || revealed.includes(card.id) || matched.includes(card.id)}/>
+          ))
+        }
+      </div>
     </div>
   )
 }
