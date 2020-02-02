@@ -86,12 +86,14 @@ const App = () => {
   }
 
   return (
-    <div>
-      <ClickCount clickCount={clickCount}/>
+    <div className='app-container'>
+      <div className='score-container'>
+        <ClickCount clickCount={clickCount}/>
+        <MyBestScore myBestScore={myBestScore}/>
+        <GlobalScore globalScore={globalScore}/>
+      </div>
       <NewGame newGame={newGame}/>
-      <MyBestScore myBestScore={myBestScore}/>
-      <GlobalScore globalScore={globalScore}/>
-      <div className='card-container'>
+      <div className='cards-container'>
         {
           cards.map((card) => (
               <Card

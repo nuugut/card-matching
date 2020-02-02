@@ -1,3 +1,4 @@
+
 .cards {
     width: 100px;
     height: 100px;
@@ -6,9 +7,34 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.score-container {
+    display: flex;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.score-container > div {
+    margin-right: 24px;
 }
 
 .new-game {
+    display: inline-block;
     border: 1px solid black;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: yellow;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
 }
