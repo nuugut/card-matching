@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 export const initCards = (cardsType) => {
     let id = 0
     let cards = []
@@ -15,4 +17,9 @@ const shuffleArray = (array) => {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array
+}
+
+export const getMyBestScore = (myBestScoreJWT) => {
+    const myBestScoreJson = jwt.verify(myBestScoreJWT, process.env.jwtSecret)
+    return myBestScoreJson['my-best-score']
 }

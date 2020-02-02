@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+const jwt = require('jsonwebtoken');
+
 import Card from '../components/card'
 import ClickCount from '../components/clickCount'
 import GlobalScore from '../components/globalScore'
 import MyBestScore from '../components/myBestScore'
 import NewGame from '../components/newGame'
-import { initCards } from '../function'
+import { initCards, getMyBestScore } from '../function'
 
 const App = () => {
   const [cards, setCards] = useState([])
@@ -25,13 +27,13 @@ const App = () => {
 
   useEffect(() => {
     setCards(initCards(cardsType))
-    setMyBestScore(localStorage.getItem('my-best-score'))
+    setMyBestScore(getMyBestScore(localStorage.getItem('JWT')))
   }, [])
 
   useEffect(() => {
     if (cards.length==(cardsType.length*2)){
       GameWon()
-      setMyBestScore(localStorage.getItem('my-best-score'))
+      setMyBestScore(getMyBestScore(localStorage.getItem('JWT')))
     }
   }, [matched])
 
@@ -76,11 +78,12 @@ const App = () => {
   }
 
   const GameWon = () => {
-    console.log(cards.length)
     if(matched.length === cards.length) {
-      if(clickCount < myBestScore) {
-        localStorage.setItem('my-best-score', clickCount)
-        document.cookie = 'my-best-score=' + clickCount
+      if(myBestScore == null || clickCount < myBestScore) {
+        const payload = {
+          'my-best-score': clickCount
+        }
+        localStorage.setItem('JWT', jwt.sign(payload, process.env.jwtSecret))
       }
     }
   }
