@@ -10,7 +10,7 @@ const Card = ({
   disableClick
 }) => (
   <div 
-    className='cards' 
+    className={`cards ${isRevealed || isMatched ? 'revealed' : ''}`} 
     onClick={() => disableClick ? null : handleClicked(id)}
     type={type}
   >

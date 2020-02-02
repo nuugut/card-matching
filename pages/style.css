@@ -12,6 +12,10 @@
     font-size: 50px;
 }
 
+.revealed {
+    background-color: green;
+}
+
 .score-container {
     display: flex;
     font-weight: bold;
