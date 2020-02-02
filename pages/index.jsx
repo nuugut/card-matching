@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Card from '../components/card'
 import ClickCount from '../components/clickCount'
+import GlobalScore from '../components/globalScore'
 import MyBestScore from '../components/myBestScore'
 import NewGame from '../components/newGame'
 import { initCards } from '../function'
@@ -12,8 +13,15 @@ const App = () => {
   const [matched, setMatched] = useState([])
   const [clickCount, setClickCount] = useState(0)
   const [myBestScore, setMyBestScore] = useState(0)
+  const [globalScore, setGlobalScore] = useState(0)
 
   const cardsType = ['1', '2', '3', '4', '5', '6']
+
+  useEffect(async() => {
+      const response = await fetch('http://localhost:5000/global-score')
+      const data = await response.text()
+      setGlobalScore(data)
+  }, [])
 
   useEffect(() => {
     setCards(initCards(cardsType))
@@ -72,6 +80,7 @@ const App = () => {
     if(matched.length === cards.length) {
       if(clickCount < myBestScore) {
         localStorage.setItem('my-best-score', clickCount)
+        document.cookie = 'my-best-score=' + clickCount
       }
     }
   }
@@ -81,6 +90,7 @@ const App = () => {
       <ClickCount clickCount={clickCount}/>
       <NewGame newGame={newGame}/>
       <MyBestScore myBestScore={myBestScore}/>
+      <GlobalScore globalScore={globalScore}/>
       {
         cards.map((card) => (
             <Card
