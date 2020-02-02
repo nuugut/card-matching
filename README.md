@@ -1,5 +1,8 @@
 # Card Matching Game
 
+### Start Flask service before do steps below (installation guide in the link)
+https://github.com/nuugut/card-matching-mock-api
+
 ## Prerequisite
 ```
 - Node
