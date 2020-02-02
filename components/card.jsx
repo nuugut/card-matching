@@ -5,14 +5,16 @@ const Card = ({
   text,
   type,
   handleClicked,
-  isRevealed
+  isRevealed,
+  isMatched,
+  disableClick
 }) => (
   <div 
     className='cards' 
-    onClick={() => handleClicked(id)}
+    onClick={() => disableClick ? null : handleClicked(id)}
     type={type}
   >
-    {isRevealed ? text : ''}
+    {isRevealed || isMatched ? text : ''}
   </div>
 )
 
